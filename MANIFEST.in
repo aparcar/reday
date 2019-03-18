@@ -1,0 +1,2 @@
+include tables.sql
+include static/style.min.css

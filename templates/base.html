@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+        <title>
+            {% block title %}{% endblock %} &mdash; reday
+        </title>
+        <link rel="stylesheet" href="/static/style.min.css">
+    </head>
+
+    <body>
+        <nav class="container navbar navbar-light navbar-expand-sm">
+            <a class="navbar-brand" href="/">
+                re<span class="text-danger">day</span>
+            </a>
+            {% if "password" in session %}
+            <ul class="navbar-nav mr-auto d-none d-sm-flex">
+                <li class="nav-item ">
+                    <a
+                        class="nav-link {% if request.path == "/write" %}active{% endif %}"
+                        href="/write">write</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a
+                        class="nav-link {% if request.path == "/read" %}active{% endif %}"
+                        href="/read">read</a>
+                </li>
+            </ul>
+            <div class="close">
+                <span class="navbar-text">
+                    <a href="/close">close</a>
+                </span>
+            </div>
+            {% endif %}
+        </nav>
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+
+</html>

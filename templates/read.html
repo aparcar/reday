@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}read{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h3>read</h3>
+        {% if entries %}
+        <section class="col-md-12">
+            <div class="event-list">
+                {% for entry in entries%}
+                <div class="event">
+                    <p><b>{{ entry[0] }}: </b>{{ entry[1] }}</p>
+                    <p>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% else %}
+        <p>
+        No entries
+        </p>
+        {% endif %}
+        {% if offset >= 15 %}
+        <a href="/read/{{ offset - 15 }}">newer</a>|
+        {% endif %}
+        <a href="/read/{{ offset + 15 }}">older</a>
+    </div>
+{% endblock %}
